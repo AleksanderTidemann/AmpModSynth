@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .button {
+        display: block;
+        width: 100%;
+        background-color: #4caf50;
+        border: none;
+        color: white;
+        padding: 5px 5px;
+        text-align: center;
+        text-decoration: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        margin: 0px 4px;
+        margin-bottom: 200px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+      }
+
+      .button1 {
+        background-color: black;
+        color: rgb(200, 255, 255);
+        /* border: 2px solid rgba(0, 0, 0, 100); */
+      }
+
+      .button1:hover {
+        border: none;
+        background-color: rgb(200, 255, 255);
+        color: black;
+      }
+    </style>
+    <h2>Interessefelt</h2>
+
+    <p>
+      Musikkteknologi, Nettverksbasert musikk og samspill, lyd-og videoanalyse,
+      programmering, elektronisk musikk og slagverk
+    </p>
+
+    <span id="app-container">
+      <button class="button button1" id="button" width="100%">
+        Click to Play!
+      </button>
+    </span>
+
+    <h2>Undervisning</h2>
+
+    <ul>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4024/index.html"
+          >MCT4024&nbsp;- Physical-Virtual Communication and Music 1</a
+        >
+      </li>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4025/index.html"
+          >MCT4025&nbsp;- Physical-Virtual Communication and Music 2</a
+        >
+      </li>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4023/index.html"
+          >MCT4023 - Physical-Virtual Communication and Music 3</a
+        >
+      </li>
+    </ul>
+
+    <h2>Bakgrunn</h2>
+
+    <ul>
+      <li>
+        2019 - 2021 Mastergrad, Music Communication &amp;
+        Technology,&nbsp;Universitetet&nbsp;i Oslo (UiO),&nbsp;Oslo, Norge
+        <ul>
+          <li>
+            Masteroppgave i samarbeid med forskningsprosjektet&nbsp;MIRAGE
+          </li>
+        </ul>
+      </li>
+      <li>
+        2015 - 2016&nbsp;Årsstudium, Live Electronics, Norges Musikkhøgskole
+        (NMH), Oslo, Norge
+      </li>
+      <li>
+        2013 - 2018 Bachelor, Musikkvitenskap, Universitetet i Oslo
+        (UiO),&nbsp;Oslo, Norge
+      </li>
+      <li>
+        2012&nbsp;- 2013 Årsstudium, Music &amp; Sound&nbsp;Design, University
+        of Technology (UTS),&nbsp;Sydney, Australia
+      </li>
+    </ul>
+    <script>
+      document.getElementById("button").addEventListener("click", function () {
+        // Erase the button
+        document.getElementById("app-container").innerHTML = "";
+
+        // Add p5 libs to script that init the WebAudio Audio Context
+        // This must happen after user interacts with the page.
+        var p5min = document.createElement("script");
+        var p5sound = document.createElement("script");
+        p5min.setAttribute("src", "./p5.min.js");
+        p5sound.setAttribute("src", "./p5.sound.js");
+        document.head.appendChild(p5min);
+        document.head.append(p5sound);
+
+        // Create the iframe element and add p5 synth to app-container
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("width", "100%");
+        iframe.setAttribute("height", "400");
+        iframe.setAttribute("allow", "autoplay");
+        iframe.setAttribute("id", "synth");
+        iframe.src = "https://preview.p5js.org/aleksati/embed/nW2B_F9mF";
+        document.getElementById("app-container").appendChild(iframe);
+      });
+    </script>
+  </body>
+</html>
