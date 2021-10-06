@@ -8,39 +8,40 @@
   </head>
   <body>
     <style>
-      .button {
+      .app-container {
         display: block;
         width: 100%;
+        padding: 20px 0px;
+      }
+
+      .button {
+        max-width: 100%;
+        width: 100%;
+        height: 50%;
         background-color: #4caf50;
         border: none;
+        border-radius: 4px;
         color: white;
-        /* padding: 5px 5px; */
+        padding: 4px 0px 4px 0px;
         text-align: center;
         text-decoration: none;
         justify-content: center;
         align-items: center;
         font-size: 30px;
-        margin-bottom: 200px;
-        transition-duration: 0.4s;
+        margin-bottom: 100px;
+        transition-duration: 0.3s;
         cursor: pointer;
       }
 
       .button1 {
         background-color: white;
         color: black;
-        border: 2px solid rgba(0, 0, 0, 100);
+        border: 2px solid #555555;
       }
 
       .button1:hover {
-        border: none;
-        background-color: rgb(200, 255, 255);
-        color: black;
-      }
-
-      .app-container {
-        display: block;
-        width: 100%;
-        padding: 20px 0px;
+        background-color: #555555;
+        color: white;
       }
     </style>
 
@@ -52,9 +53,7 @@
     </p>
 
     <span id="app-container">
-      <button class="button button1" id="button" width="100%">
-        Click to Play!
-      </button>
+      <button class="button button1" id="button">Click to Play!</button>
     </span>
 
     <h2>Teaching</h2>
