@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .app-container {
+        display: block;
+        width: 100%;
+        padding: 20px 0px;
+      }
+
+      .button {
+        max-width: 100%;
+        width: 100%;
+        height: 50%;
+        background-color: #4caf50;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        padding: 4px 0px 4px 0px;
+        text-align: center;
+        text-decoration: none;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        margin-bottom: 100px;
+        transition-duration: 0.3s;
+        cursor: pointer;
+      }
+
+      .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #555555;
+      }
+
+      .button1:hover {
+        background-color: #555555;
+        color: white;
+      }
+    </style>
+
+    <h2>Fields of Interest</h2>
+
+    <p>
+      Music technology, networked music performances, audio and video
+      analysis,&nbsp;programming,&nbsp;electronic&nbsp;music and drumming
+    </p>
+
+    <span id="app-container">
+      <button class="button button1" id="button">Click to Play! 🔊</button>
+    </span>
+
+    <h2>Teaching</h2>
+
+    <ul>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4024/index.html"
+          >MCT4024&nbsp;- Physical-Virtual Communication and Music 1</a
+        >
+      </li>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4025/index.html"
+          >MCT4025&nbsp;- Physical-Virtual Communication and Music 2</a
+        >
+      </li>
+      <li>
+        <a href="https://www.uio.no/studier/emner/hf/imv/MCT4023/index.html"
+          >MCT4023 - Physical-Virtual Communication and Music 3</a
+        >
+      </li>
+    </ul>
+
+    <h2>Background</h2>
+
+    <ul>
+      <li>
+        2019 - 2021 Master's degree, Music Communication &amp;
+        Technology,&nbsp;University of Oslo (UiO),&nbsp;Oslo, Norway
+        <ul>
+          <li>
+            Thesis&nbsp;in collaboration with the&nbsp;MIRAGE research project
+          </li>
+        </ul>
+      </li>
+      <li>
+        2015 - 2016&nbsp;Year Study, Live Electronics, Norwegian Academy of
+        Music (NMH), Oslo, Norway
+      </li>
+      <li>
+        2013 - 2018 Bachelor's degree, Musicology, University of Oslo
+        (UiO),&nbsp;Oslo, Norway
+      </li>
+      <li>
+        2012&nbsp;- 2013 Year Study, Music &amp; Sound&nbsp;Design, University
+        of Technology (UTS),&nbsp;Sydney, Australia
+      </li>
+    </ul>
+
+    <p>&nbsp;</p>
+    <script>
+      document.getElementById("button").addEventListener("click", function () {
+        // Erase the button
+        document.getElementById("app-container").innerHTML = "";
+
+        // Add p5 libs to script that init the WebAudio Audio Context
+        // This must happen after user interacts with the page.
+        var p5min = document.createElement("script");
+        var p5sound = document.createElement("script");
+        p5min.setAttribute("src", "./p5.min.js");
+        p5sound.setAttribute("src", "./p5.sound.js");
+        document.head.appendChild(p5min);
+        document.head.append(p5sound);
+
+        // Create the iframe element and add p5 synth to app-container
+        var iframe = document.createElement("iframe");
+        iframe.setAttribute("width", "100%");
+        iframe.setAttribute("height", "400");
+        iframe.setAttribute("allow", "autoplay");
+        iframe.setAttribute("id", "synth");
+        iframe.src = "https://preview.p5js.org/aleksati/embed/nW2B_F9mF";
+        document.getElementById("app-container").appendChild(iframe);
+      });
+    </script>
+  </body>
+</html>
