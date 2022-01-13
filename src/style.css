@@ -9,45 +9,5 @@ canvas {
 }
 /* 
 #synth-holder {
-  height: 400px;
+  something..
 } */
-
-/* Styles the whole slider */
-.mySliders {
-  width: 80px;
-  background-color: transparent;
-
-  /* Removes some defaults */
-  -webkit-appearance: none;
-}
-
-/* These styles affect what happens when the cursor is focused on the slider (i.e. clicking it) */
-.mySliders:focus {
-  /* Stops the default outline showing up */
-  outline: none;
-}
-
-/* This is the "track" that the slider sits on  */
-.mySliders::-webkit-slider-runnable-track {
-  background: #555555;
-  height: 3px;
-  -webkit-appearance: none;
-
-  /* Turns the cursor into the hand pointer icon when hovering over the slider  */
-  cursor: pointer;
-}
-
-/* This is the moveable bit of the slider, known as the "thumb"*/
-.mySliders::-webkit-slider-thumb {
-  width: 15px;
-  height: 15px;
-  background: #555555;
-  cursor: pointer;
-  -webkit-appearance: none;
-
-  /* negative top padding moves it up */
-  margin-top: -6px;
-
-  /* Border radius gives rounded corners, if they're big enough, you end up with circles */
-  border-radius: 2px;
-}

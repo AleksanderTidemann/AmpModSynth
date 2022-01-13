@@ -6,7 +6,7 @@ let modAmp = 0;
 let waveformStroke;
 let canvasHeight = 400;
 
-let ramptime = 400;
+let ramptime = 500;
 let sound = false;
 let carrierFreqSlider;
 let carrierFreqSliderPosX = 140;
@@ -23,7 +23,7 @@ function setup() {
   colorMode(RGB);
 
   // user frequency slider
-  carrierFreqSlider = createCSlider(50, 500, 200, 1);
+  carrierFreqSlider = new CSlider(50, 500, 200, 1);
 
   // the color and opacity of the waveform
   waveformStroke = colorWaveform;
@@ -59,7 +59,7 @@ function draw() {
   waveform = fft.waveform();
   drawWaveform();
   drawText(modFreq, modAmp);
-  drawSlider(carrierFreqSliderPosX, carrierFreqSliderPosY);
+  carrierFreqSlider.position(carrierFreqSliderPosX, carrierFreqSliderPosY);
 }
 
 // when the window is clicked.
@@ -125,16 +125,7 @@ function drawText(modFreq, modAmp) {
   text("Carrier Frequency: ", 10, 385);
 }
 
-// ========== cslider.js ===========
-function drawSlider(x, y) {
-  carrierFreqSlider.position(x, y);
-}
-
-function createCSlider(a, b, c, d) {
-  r = new CSlider(a, b, c, d);
-  return r;
-}
-
+// ========== cslider ===========
 class CSlider {
   constructor(min, max, value = (min + max) / 2, step = 1) {
     this.width = 130;
