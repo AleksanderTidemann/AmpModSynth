@@ -64,8 +64,7 @@ function draw() {
 
 // when the window is clicked.
 function touchStarted(item) {
-  console.log(item);
-  if (mouseOnSlider(item.clientX, item.clientY)) return;
+  if (carrierFreqSlider.overEvent()) return;
   if (getAudioContext().state !== "running") {
     //carrier.amp(0.3, ramptime / 1000);
     modulator.amp(0.2, ramptime / 1000);
@@ -93,22 +92,6 @@ function mouse2sound() {
   // Fade time of 0.1 for smooth fading
   modulator.freq(modFreq);
   modulator.amp(modAmp, 0.2);
-}
-
-function mouseOnSlider(mousePosX, mousePosY) {
-  // if it is, we dont want to stop the audio when clicking
-  console.log(mousePosY);
-  if (
-    mousePosX <= carrierFreqSliderPosX + carrierFreqSlider.width &&
-    mousePosX >= carrierFreqSliderPosX &&
-    mousePosY >= carrierFreqSliderPosY - carrierFreqSlider.height &&
-    mousePosY <= carrierFreqSliderPosY + carrierFreqSlider.height
-  ) {
-    console.log("on");
-    return true;
-  }
-  console.log("off");
-  return false;
 }
 
 function drawWelcomeScreen() {
