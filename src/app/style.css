@@ -7,13 +7,4 @@ canvas {
   display: block;
   border: solid black;
   border-radius: 12px;
-  /* max-width: 690px;
-  min-width: 200px;
-  max-height: 400px; */
 }
-
-/* #synth-holder {
-  max-width: 690px;
-  min-width: 200px;
-  max-height: 400px;
-} */

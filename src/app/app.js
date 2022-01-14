@@ -13,8 +13,8 @@ let carrierFreqSlider;
 let carrierFreqSliderPosX = 140;
 let carrierFreqSliderPosY = 375;
 
-// let pageWrapper = "vrtx-person-main-content-wrapper";
-let pageWrapper = "synth-holder";
+let pageWrapper = "vrtx-person-main-content-wrapper";
+//let pageWrapper = "synth-holder"; // for development
 let parent = "synth-holder";
 let canvasHeight = 400;
 let canvasWidth = 0;
@@ -107,7 +107,7 @@ function drawPlayText() {
   fill("blue");
   textSize(playTextSize);
   textAlign(CENTER, BASELINE);
-  text("Click to Play", canvasWidth / 2, canvasHeight / 2 - 2);
+  text("Click to Play", canvasWidth / 2, canvasHeight / 2 - 6);
 }
 
 function drawWaveform() {
