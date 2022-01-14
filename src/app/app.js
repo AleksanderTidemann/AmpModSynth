@@ -1,28 +1,40 @@
-let carrier; // this is the oscillator we will hear
-let modulator; // this oscillator will modulate the amplitude of the carrier
-let fft; // we'll visualize the waveform
+let carrier;
+let modulator;
+let fft;
 let modFreq = 0;
 let modAmp = 0;
 let waveformStroke;
-let canvasHeight = 400;
+let waveform;
+let canvas;
 
 let ramptime = 500;
 let sound = false;
 let carrierFreqSlider;
 let carrierFreqSliderPosX = 140;
-let carrierFreqSliderPosY = 372;
+let carrierFreqSliderPosY = 375;
+
+// let pageWrapper = "vrtx-person-main-content-wrapper";
+let pageWrapper = "synth-holder";
+let parent = "synth-holder";
+let canvasHeight = 400;
+let canvasWidth = 0;
 
 let colorBackground = "white";
 let colorWaveform = "black";
 let colorWaveformText = "#555555";
+let playTextSize = 50;
 
 function setup() {
-  let canvas = createCanvas(windowWidth, canvasHeight);
-  canvas.parent("synth-holder");
+  // setup canvas
+  let page = document.getElementById(pageWrapper);
+  canvasWidth = page.offsetWidth;
+  canvas = createCanvas(canvasWidth, canvasHeight);
+  canvas.parent(parent);
+  canvas.mouseClicked(handleClick);
   background(colorBackground);
   colorMode(RGB);
 
-  // user frequency slider
+  // User frequency slider
   carrierFreqSlider = new CSlider(50, 500, 200, 1);
 
   // the color and opacity of the waveform
@@ -36,9 +48,8 @@ function setup() {
   carrier = new p5.Oscillator();
   carrier.freq(0);
   carrier.amp(0);
-  // !AMPLITUDE MODULATION!
+
   // Modulate the carrier's amplitude with the modulator
-  // Optionally, we can scale the signal.
   carrier.amp(modulator.scale(-1, 1, 1, -1), 0.2);
 
   // create an fft to analyze the audio
@@ -50,56 +61,53 @@ function setup() {
 
 function draw() {
   background(colorBackground);
-  if (sound) {
-    mouse2sound();
-  } else {
-    drawWelcomeScreen();
-  }
-  // analyze the waveform
+  sound ? mouse2sound() : drawPlayText();
   waveform = fft.waveform();
   drawWaveform();
-  drawText(modFreq, modAmp);
-  carrierFreqSlider.position(carrierFreqSliderPosX, carrierFreqSliderPosY);
+  drawText();
+  drawSlider();
 }
 
-// when the window is clicked.
-function touchStarted(item) {
-  if (carrierFreqSlider.overEvent()) return;
-  if (getAudioContext().state !== "running") {
-    //carrier.amp(0.3, ramptime / 1000);
-    modulator.amp(0.2, ramptime / 1000);
-    setTimeout(() => {
-      getAudioContext().resume();
-    }, ramptime);
-    getAudioContext().resume();
+function handleClick() {
+  if (carrierFreqSlider.overEvent()) return; // if the mouse is over the slider, do nothing
+  let audioState = getAudioContext().state;
+  audioState !== "running" ? startAudioContext() : suspendAudioContext();
+}
+
+function startAudioContext() {
+  getAudioContext().resume();
+  modulator.amp(0.2, ramptime / 1000);
+  setTimeout(() => {
     sound = true;
-  } else {
-    sound = false;
-    modulator.amp(0, ramptime / 1000);
-    setTimeout(() => {
-      getAudioContext().suspend();
-    }, ramptime);
-  }
+  }, ramptime);
+}
+
+function suspendAudioContext() {
+  sound = false;
+  modulator.amp(0, ramptime / 1000);
+  carrier.amp(0, ramptime / 1000);
+  setTimeout(() => {
+    getAudioContext().suspend();
+  }, ramptime);
 }
 
 function mouse2sound() {
-  modFreq = map(mouseY, 0, height, 20, 0);
-  modAmp = map(mouseX, 0, width, 0, 1);
-
   // Slider controls the carrier frequency
   carrier.freq(carrierFreqSlider.value());
 
-  // Fade time of 0.1 for smooth fading
+  modFreq = map(mouseY, 0, height, 20, 0);
+  modAmp = map(mouseX, 0, width, 0, 1);
   modulator.freq(modFreq);
   modulator.amp(modAmp, 0.2);
 }
 
-function drawWelcomeScreen() {
+function drawPlayText() {
   stroke(waveformStroke);
   strokeWeight(0.5);
   fill("blue");
-  textSize(100);
-  text("Click to Play", 50, canvasHeight / 2);
+  textSize(playTextSize);
+  textAlign(CENTER, BASELINE);
+  text("Click to Play", canvasWidth / 2, canvasHeight / 2 - 2);
 }
 
 function drawWaveform() {
@@ -115,17 +123,23 @@ function drawWaveform() {
   endShape();
 }
 
-function drawText(modFreq, modAmp) {
+function drawText() {
   stroke(waveformStroke);
   strokeWeight(0.4);
   fill(colorWaveformText);
   textSize(15);
+  textAlign(LEFT);
   text("Modulator Frequency: " + modFreq.toFixed(3) + " Hz", 10, 345);
   text("Modulator Amplitude: " + modAmp.toFixed(3), 10, 365);
   text("Carrier Frequency: ", 10, 385);
 }
 
-// ========== cslider ===========
+function drawSlider() {
+  carrierFreqSlider.position(carrierFreqSliderPosX, carrierFreqSliderPosY);
+}
+
+// custom slider that you can position
+// relative (inside) to the canvas element
 class CSlider {
   constructor(min, max, value = (min + max) / 2, step = 1) {
     this.width = 130;
