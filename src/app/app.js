@@ -13,9 +13,10 @@ let carrierFreqSlider;
 let carrierFreqSliderPosX = 140;
 let carrierFreqSliderPosY = 375;
 
-let pageWrapper = "vrtx-person-main-content-wrapper";
-//let pageWrapper = "synth-holder"; // for development
-let parent = "synth-holder";
+let wrapper;
+//let wrapperID = "vrtx-person-main-content-wrapper";
+let wrapperID = "synth-holder"; // for development
+let parentID = "synth-holder";
 let canvasHeight = 400;
 let canvasWidth = 0;
 
@@ -26,10 +27,10 @@ let playTextSize = 50;
 
 function setup() {
   // setup canvas
-  let page = document.getElementById(pageWrapper);
-  canvasWidth = page.offsetWidth;
+  wrapper = document.getElementById(wrapperID);
+  canvasWidth = wrapper.offsetWidth;
   canvas = createCanvas(canvasWidth, canvasHeight);
-  canvas.parent(parent);
+  canvas.parent(parentID);
   canvas.mouseClicked(handleClick);
   background(colorBackground);
   colorMode(RGB);
